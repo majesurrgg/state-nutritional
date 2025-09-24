@@ -1,0 +1,21 @@
+sw / Codigo o identificador de registro
+diresa / direccion regional de salud, entidad de salud a nivel regional
+red / red de salud, organiza los servicios de salud a nivel de una provincia o conjunto de distritos
+microred / microred de salud, un nivel mas pequeño que la red, agrupa varios establecimientos de salud
+EESS / establecimiento de salud, puede ser un hospital, centro de salud o puesto de salud
+dpto_eess / departamento del establecimiento de salud
+prov_eess/ provincia del establecimiento de salud
+dist_eess / distrito del establecimiento de salud
+renipress / codigo del establecimiento de salud en el registro nacional de instituciones prestadoras de servicios de salud
+pais / pais de orign del registro
+sexo / genero del niño
+fechanacimiento / fecha de nacimiento
+edadmeses / edad del niño expresada en meses
+ubigeoPN / departamentopn / provinciapn / distritopn / centropobladopn / codigo y nombre de la ubicacion geografica del paciente
+juntos / indica si el niño pertenece al programa social juntos
+sis / indica si el niño cuenta con el seguro integral de salud (SIS)
+pin / se refiere a la puntuacion de isonutricion
+qaliwarma / indica si el niño esta afiliado al programa social de qaliwarma
+hemo
+
+

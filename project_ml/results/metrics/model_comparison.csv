@@ -1,0 +1,5 @@
+Modelo,Accuracy,AUC-ROC
+Random Forest,1.0000,1.0000
+Xgboost,1.0000,1.0000
+Svm,0.8621,0.9514
+Stacking Ensemble,1.0000,1.0000

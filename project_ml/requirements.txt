@@ -1,0 +1,40 @@
+# Dependencias principales para el proyecto de ML
+# Predicción de Estado Nutricional Infantil
+
+# Manipulación de datos
+pandas>=1.5.0
+numpy>=1.21.0
+
+# Machine Learning
+scikit-learn>=1.2.0
+xgboost>=1.7.0
+
+# Visualización
+matplotlib>=3.5.0
+seaborn>=0.11.0
+
+# Utilidades
+joblib>=1.2.0
+
+# Análisis estadístico (opcional)
+scipy>=1.9.0
+statsmodels>=0.13.0
+
+# Manejo de configuraciones (opcional)
+PyYAML>=6.0
+
+# Jupyter notebooks (opcional para exploración)
+jupyter>=1.0.0
+ipykernel>=6.0.0
+
+# Progreso y logging (opcional)
+tqdm>=4.64.0
+
+# Para manejo de fechas
+python-dateutil>=2.8.0
+
+# Para mejorar warnings
+warnings
+
+# Para validación de tipos (desarrollo)
+typing-extensions>=4.0.0

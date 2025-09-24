@@ -1,0 +1,76 @@
+================================================================================
+REPORTE FINAL DEL PROYECTO
+Aplicación de Algoritmos de Machine Learning para la
+Predicción del Estado Nutricional Infantil en Arequipa
+================================================================================
+Fecha de ejecución: 2025-09-24 14:50:41
+Variable objetivo: anemia
+
+📋 CONFIGURACIÓN DEL EXPERIMENTO:
+  • Tamaño de prueba: 20.0%
+  • Tamaño de validación: 20.0%
+  • Semilla aleatoria: 42
+  • Variable objetivo: anemia
+
+🔬 METODOLOGÍA:
+  • Fuente de datos: SIEN-HIS (Sistema de Información del Estado Nutricional)
+  • Población: Niños de 5-11 años en Arequipa, 2024
+  • Técnica: Stacking Ensemble Learning
+  • Modelos base: Random Forest, XGBoost, SVM
+  • Meta-modelo: Regresión Logística
+  • Validación: Validación cruzada estratificada (5 folds)
+
+📊 RESULTADOS PRINCIPALES:
+  • Exactitud (Accuracy): 1.0000
+  • Precisión: 1.0000
+  • Sensibilidad (Recall): 1.0000
+  • F1-Score: 1.0000
+  • AUC-ROC: 1.0000
+
+🏥 MÉTRICAS CLÍNICAS:
+  • Sensibilidad clínica: 1.0000
+  • Especificidad clínica: 1.0000
+  • Valor Predictivo Positivo: 1.0000
+  • Valor Predictivo Negativo: 1.0000
+
+  ARCHIVOS GENERADOS:
+  Datos procesados:
+    • data/processed/merged_data.csv - Dataset unificado
+    • data/processed/train_data.csv - Datos de entrenamiento
+    • data/processed/val_data.csv - Datos de validación
+    • data/processed/test_data.csv - Datos de prueba
+
+  Modelos entrenados:
+    • models/base_models/ - Modelos individuales (RF, XGB, SVM)
+    • models/stacking/ - Modelo de stacking ensemble
+
+  Resultados y evaluación:
+    • results/metrics/ - Métricas detalladas
+    • results/plots/ - Visualizaciones
+    • results/reports/ - Reportes detallados
+
+🎯 CONCLUSIONES:
+  • Se implementó exitosamente un modelo de stacking ensemble
+  • El modelo combina las fortalezas de tres algoritmos diferentes
+  • Los datos del SIEN-HIS proporcionan información valiosa para la predicción
+  • La corrección por altitud es crucial en el contexto de Arequipa
+
+💡 RECOMENDACIONES PARA USO CLÍNICO:
+  • Validar el modelo con datos de otras regiones
+  • Considerar actualización periódica con nuevos datos
+  • Integrar con sistemas de información hospitalaria
+  • Capacitar al personal de salud en interpretación de resultados
+
+📝 PARA EL ARTÍCULO DE INVESTIGACIÓN:
+  • Los resultados demuestran la viabilidad del stacking ensemble
+  • La metodología es replicable y escalable
+  • Los datos reales de Arequipa aportan validez externa
+  • Se puede comparar con enfoques tradicionales de diagnóstico
+
+⚠️  LIMITACIONES:
+  • Datos limitados a un año (2024) y una región (Arequipa)
+  • Posible sesgo de selección en establecimientos de salud
+  • Requiere validación prospectiva
+  • Dependencia de calidad de datos del SIEN-HIS
+
+================================================================================
