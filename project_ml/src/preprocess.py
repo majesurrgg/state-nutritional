@@ -1,4 +1,8 @@
 # preprocesamiento de datos
+# limpia, integra y transforma los datos crudos
+# crea nuevas caracteristicas relevantes para el diagnostico
+# divide los datos en conjuntos de entrenamiento validacion y prueba
+# guarda los datos procesado en data/processed/
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split

@@ -1,5 +1,7 @@
 # funciones:
+# carga los datos procesados
 # entrenamiento de modelos base (random_forest, xgboost, svm)
+# combina los modelos base usando stacking ensemble
 # implementacion de stacking ensemble
 # guardado de modelos
 

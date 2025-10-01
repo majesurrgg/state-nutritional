@@ -1,11 +1,13 @@
 # funciones:
+# carga el modelo final y los datos de prueba
+# realiza predicciones y calcula métricas detalladas
 # evaluacion de modelos individuales y stacking
 # calculo de métricas (precisión, recall, F1, AUC)
 # generación de reportes
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
+import seaborn as sns      
 
 from sklearn.metrics import (
     accuracy_score, precision_score, recall_score, f1_score,
@@ -18,11 +20,14 @@ import joblib
 import os
 
 class ModelEvaluator:
+    # define la ruta del modelo a evaluar y variables para almacenar resultados
     def __init__(self, model_path='models/stacking/stacking_ensemble.pkl'):
         self.model_path = model_path
         self.model = None
         self.results = {}
-        
+    ###########################################################################    
+     
+    # carga el modelo entrenado desde disco       
     def load_model(self):
         """Cargar modelo entrenado"""
         try:
@@ -33,6 +38,7 @@ class ModelEvaluator:
             print(f"Error cargando modelo: {e}")
             return False
     
+    # carga de modelo y datos de prueba desde un archivo CSV
     def load_test_data(self):
         """Cargar datos de prueba"""
         try:
@@ -47,11 +53,13 @@ class ModelEvaluator:
             print(f"Error cargando datos de prueba: {e}")
             return None, None
     
+    
+    # calcula la especificidad como accuracy, precision, recall, F1, AUC, matriz de confusión
     def calculate_detailed_metrics(self, y_true, y_pred, y_proba):
         """Calcular métricas detalladas"""
         metrics = {}
         
-        # Métricas básicas
+        # metricas básicas
         metrics['accuracy'] = accuracy_score(y_true, y_pred)
         metrics['precision'] = precision_score(y_true, y_pred, average='weighted', zero_division=0)
         metrics['recall'] = recall_score(y_true, y_pred, average='weighted', zero_division=0)
@@ -74,11 +82,13 @@ class ModelEvaluator:
         
         return metrics
     
+    # calcular la especificidad (verdaderos negativos)
     def _calculate_specificity(self, y_true, y_pred):
         """Calcular especificidad (tasa de verdaderos negativos)"""
         tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
         return tn / (tn + fp) if (tn + fp) > 0 else 0
     
+    # calcula métricas clínicas como sensibilidad, especificidad, Valores predictivos, VPN, razones de verosimilitud y las interpreta
     def evaluate_clinical_relevance(self, y_true, y_pred, y_proba):
         """Evaluación desde perspectiva clínica"""
         clinical_metrics = {}
@@ -100,6 +110,7 @@ class ModelEvaluator:
         
         return clinical_metrics
     
+    # genera interpretaciones textuales de las métricas clínicas
     def _interpret_clinical_metrics(self, metrics):
         """Interpretar métricas desde perspectiva clínica"""
         interpretation = {}
@@ -126,6 +137,7 @@ class ModelEvaluator:
         
         return interpretation
     
+    # genera y guarda gráficos de evaluación como matriz de confusión, curvas ROC y Precision-Recall, distribución de predicciones y probabilidades, curva de calibración y métricas por clase
     def create_visualizations(self, y_true, y_pred, y_proba):
         """Crear visualizaciones de evaluación"""
         os.makedirs('results/plots', exist_ok=True)
@@ -223,6 +235,7 @@ class ModelEvaluator:
         
         print("Visualizaciones guardadas en results/plots/evaluation_comprehensive.png")
     
+    # crea un reporte textual con todas las métricas, interpretaciones y recomendaciones 
     def generate_detailed_report(self, metrics, clinical_metrics):
         """Generar reporte detallado"""
         report = []
@@ -294,6 +307,7 @@ class ModelEvaluator:
         
         return '\n'.join(report)
     
+    # ejecuta todo el flujo, carga modelos y datos, realiza predicciones, calcula métricas, genera visualiazciones y reportes, guarda resultados en disco
     def comprehensive_evaluation(self):
         """Evaluación completa del modelo"""
         # Cargar modelo y datos
@@ -346,6 +360,7 @@ class ModelEvaluator:
         
         return self.results
 
+# ejecuta la evaluacion completa del modelo y muestra mensajes de exito o error
 def main():
     """Función principal para evaluación"""
     print("INICIANDO EVALUACIÓN DETALLADA DEL MODELO")
