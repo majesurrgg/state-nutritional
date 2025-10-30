@@ -377,9 +377,9 @@ def main():
     
     if results:
         ensemble, base_results, stacking_results = results
-        print("\n✅ Entrenamiento completado exitosamente!")
-        print("📁 Modelos guardados en la carpeta 'models/'")
-        print("📊 Resultados guardados en la carpeta 'results/'")
+        print("\nEntrenamiento completado exitosamente!")
+        print("Modelos guardados en la carpeta 'models/'")
+        print("Resultados guardados en la carpeta 'results/'")
     else:
         print("\n❌ Error en el entrenamiento")
 
