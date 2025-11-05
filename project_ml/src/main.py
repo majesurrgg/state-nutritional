@@ -8,6 +8,7 @@ import sys
 import argparse
 import time
 from datetime import datetime
+from eda import ExploratoryDataAnalysis
 
 # Agregar el directorio src al path
 sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
@@ -18,6 +19,30 @@ from train_models import ModelTrainer
 from evaluate import ModelEvaluator
 
 class MLPipeline:
+    def step_0_eda(self):
+        """Paso 0: Análisis Exploratorio de Datos"""
+        print("\n" + "="*60)
+        print("PASO 0: ANÁLISIS EXPLORATORIO DE DATOS (EDA)")
+        print("="*60)
+    
+        start_time = time.time()
+    
+        try:
+            eda = ExploratoryDataAnalysis()
+            success = eda.run_complete_eda()
+        
+            if not success:
+                raise Exception("Error en el EDA")
+        
+            print(f"\n✅ EDA completado exitosamente!")
+            print(f"⏱️  Tiempo: {time.time() - start_time:.2f} segundos")
+        
+            return True
+        
+        except Exception as e:
+            print(f"\n❌ Error en EDA: {e}")
+            return False
+    
     def __init__(self, config=None):
         self.config = config or self.get_default_config()
         self.preprocessor = None
@@ -287,10 +312,14 @@ class MLPipeline:
     def run_complete_pipeline(self):
         """Ejecutar pipeline completo"""
         print("🚀 INICIANDO PIPELINE COMPLETO DE MACHINE LEARNING")
-        print("Predicción del Estado Nutricional Infantil - Arequipa")
-        print("="*80)
+        #print("Predicción del Estado Nutricional Infantil - Arequipa")
+        #print("="*80)
         
         pipeline_start = time.time()
+        
+        # Paso 0: EDA (NUEVO)
+        if not self.step_0_eda():
+            print("\n⚠️  EDA falló, pero continuando...")
         
         # Paso 1: Preprocesamiento
         if not self.step_1_preprocess():

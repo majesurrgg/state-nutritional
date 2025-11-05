@@ -1,0 +1,34 @@
+================================================================================
+REPORTE DETALLADO DE EVALUACIÓN DEL MODELO
+Predicción de Estado Nutricional Infantil - Arequipa
+================================================================================
+
+📊 MÉTRICAS GENERALES:
+  • Accuracy (Exactitud):     1.0000
+  • Precision (Precisión):    1.0000
+  • Recall (Sensibilidad):    1.0000
+  • F1-Score:                 1.0000
+  • AUC-ROC:                  1.0000
+  • Average Precision:        1.0000
+
+🏥 MÉTRICAS CLÍNICAS:
+  • Sensibilidad (Sensitivity): 1.0000
+  • Especificidad (Specificity): 1.0000
+  • Valor Predictivo Positivo:   1.0000
+  • Valor Predictivo Negativo:   1.0000
+
+💡 INTERPRETACIÓN CLÍNICA:
+  • Sensitivity: Excelente - Muy pocos casos de anemia pasarán desapercibidos
+  • Specificity: Excelente - Muy pocos falsos positivos
+
+📋 MATRIZ DE CONFUSIÓN:
+    Predicción →  0    1
+  Real ↓
+    0             39    0
+    1              0   19
+
+🎯 RECOMENDACIONES PARA USO CLÍNICO:
+  ✅ El modelo tiene buena sensibilidad para detectar casos de anemia
+  ✅ El modelo tiene baja tasa de falsos positivos
+
+📈 SUGERENCIAS DE MEJORA:

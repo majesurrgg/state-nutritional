@@ -16,29 +16,36 @@ class DataPreprocessor:
         self.label_encoders = {}
         
     def load_datasets(self):
-        """Cargar datasets de HB y PT"""
+        """Cargar datasets de HB y PT de 2022, 2023, 2024"""
         try:
-            # Cargar datos de hemoglobina
-            hb_files = [f for f in os.listdir(os.path.join(self.data_path, 'hb/')) if f.endswith('.csv')]
-            pt_files = [f for f in os.listdir(os.path.join(self.data_path, 'pt/')) if f.endswith('.csv')]
-            
-            # Cargar y concatenar archivos HB
+            years = ['2022', '2023', '2024']  # AÑADIR ESTA LÍNEA
+        
             hb_dfs = []
-            for file in hb_files:
-                df = pd.read_csv(os.path.join(self.data_path, 'hb/', file))
-                hb_dfs.append(df)
-            hb_data = pd.concat(hb_dfs, ignore_index=True)
-            
-            # Cargar y concatenar archivos PT
             pt_dfs = []
-            for file in pt_files:
-                df = pd.read_csv(os.path.join(self.data_path, 'pt/', file))
-                pt_dfs.append(df)
-            pt_data = pd.concat(pt_dfs, ignore_index=True)
+        
+            # Cargar por año
+            for year in years:
+                # Buscar archivos HB del año
+                hb_year_files = [f for f in os.listdir(os.path.join(self.data_path, f'hb/{year}/'))
+                                 if f.endswith('.csv')]
+                for file in hb_year_files:
+                    df = pd.read_csv(os.path.join(self.data_path, f'hb/{year}/', file))
+                    df['año'] = year  # Añadir columna de año
+                    hb_dfs.append(df)
             
+                # Buscar archivos PT del año
+                pt_year_files = [f for f in os.listdir(os.path.join(self.data_path, f'pt/{year}/'))
+                                 if f.endswith('.csv')]
+                for file in pt_year_files:
+                    df = pd.read_csv(os.path.join(self.data_path, f'pt/{year}/', file))
+                    df['año'] = year
+                    pt_dfs.append(df)
+            hb_data = pd.concat(hb_dfs, ignore_index=True)
+            pt_data = pd.concat(pt_dfs, ignore_index=True)
+            print(f"Datos cargados: {len(years)} años")
             print(f"HB data shape: {hb_data.shape}")
             print(f"PT data shape: {pt_data.shape}")
-            
+        
             return hb_data, pt_data
             
         except Exception as e:
@@ -95,11 +102,11 @@ class DataPreprocessor:
         if 'Hemoglobina' in df.columns:
             df = df[(df['Hemoglobina'] > 5) & (df['Hemoglobina'] < 20)]  # Valores realistas
         if 'Peso' in df.columns:
-            df = df[(df['Peso'] > 10) & (df['Peso'] < 80)]  # Peso realista para 5-11 años
+            df = df[(df['Peso'] > 2) & (df['Peso'] < 25)]    # Peso realista para menores de 5
         if 'Talla' in df.columns:
-            df = df[(df['Talla'] > 80) & (df['Talla'] < 160)]  # Talla realista
+            df = df[(df['Talla'] > 45) & (df['Talla'] < 120)]  # Talla realista para menores de 5
         if 'EdadMeses_hb' in df.columns:
-            df = df[(df['EdadMeses_hb'] >= 60) & (df['EdadMeses_hb'] <= 132)]  # 5-11 años
+            df = df[(df['EdadMeses_hb'] >= 0) & (df['EdadMeses_hb'] <= 59)] # 0-5 años (menores de 5)
         
         print(f"Datos después de limpieza: {df.shape}")
         return df
@@ -114,10 +121,10 @@ class DataPreprocessor:
         # Características demográficas
         if 'EdadMeses_hb' in df.columns:
             df['Edad_años'] = pd.to_numeric(df['EdadMeses_hb'], errors='coerce') / 12
-            df['Grupo_edad'] = pd.cut(df['Edad_años'], 
-                                     bins=[5, 7, 9, 11], 
-                                     labels=['5-6años', '7-8años', '9-11años'],
-                                     include_lowest=True)
+            df['Grupo_edad'] = pd.cut(df['EdadMeses_hb'], 
+                         bins=[0, 6, 12, 24, 36, 59], 
+                         labels=['0-5m', '6-11m', '12-23m', '24-35m', '36-59m'],
+                         include_lowest=True)
         
         # Características geográficas
         if 'AlturaREN_hb' in df.columns:
