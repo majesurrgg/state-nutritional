@@ -1,0 +1,83 @@
+# config/config.yaml
+CONFIG_YAML = """
+# Configuración General del Proyecto
+project:
+  name: "Anemia Prediction Arequipa"
+  version: "1.0.0"
+  author: "Tu Nombre"
+  
+# Rutas de Datos
+data:
+  raw_path: "data/raw/"
+  processed_path: "data/processed/"
+  interim_path: "data/interim/"
+  years: [2022, 2023, 2024]
+  
+# Variables
+variables:
+  target: "anemia"  # opciones: anemia, desnutricion, riesgo
+  hemoglobin_columns: ["Hemoglobina", "Hbc", "EdadMeses", "Sexo", "AlturaREN"]
+  anthropometry_columns: ["Peso", "Talla", "EdadMeses", "Sexo", "ZPE", "ZTE", "ZIMCE"]
+  
+# Preprocesamiento
+preprocessing:
+  test_size: 0.2
+  val_size: 0.2
+  random_state: 42
+  outlier_method: "iqr"  # iqr, zscore
+  scaling: true
+  
+# Modelos
+models:
+  random_forest:
+    n_estimators: 100
+    max_depth: 10
+    min_samples_split: 10
+    min_samples_leaf: 4
+    
+  xgboost:
+    n_estimators: 100
+    max_depth: 6
+    learning_rate: 0.1
+    subsample: 0.8
+    colsample_bytree: 0.8
+    
+  svm:
+    kernel: "rbf"
+    C: 1.0
+    gamma: "scale"
+    
+  stacking:
+    cv_folds: 5
+    final_estimator: "logistic_regression"
+    
+# Evaluación
+evaluation:
+  metrics: ["accuracy", "precision", "recall", "f1", "auc_roc"]
+  clinical_metrics: ["sensitivity", "specificity", "ppv", "npv"]
+  subgroups: ["age", "sex", "altitude", "year"]
+  
+# Interpretabilidad
+interpretability:
+  shap_analysis: true
+  feature_importance: true
+  n_examples: 10
+  
+# Validación Temporal
+temporal_validation:
+  train_years: [2022, 2023]
+  test_year: 2024
+  
+# Outputs
+outputs:
+  save_models: true
+  save_plots: true
+  save_reports: true
+  plot_format: "png"
+  plot_dpi: 300
+  
+# Logging
+logging:
+  level: "INFO"
+  file: "logs/pipeline.log"
+"""
